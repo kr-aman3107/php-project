@@ -17,7 +17,7 @@ pipeline {
         }
           stage('Docker login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
                     sh 'docker push kraman3107/2febimg:v1'
                 }
@@ -32,7 +32,7 @@ pipeline {
                     sshagent(['sshkeypair']) {
                         //chnage the private ip in below code
                         // sh "docker run -itd --name My-first-containe2111 -p 8083:80 akshu20791/2febimg:v1"
-                         sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.2.113 ${dockerrm}"
+                         sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.46.37 ${dockerrm}"
                          sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.46.37 ${dockerCmd}"
                     }
                 }
